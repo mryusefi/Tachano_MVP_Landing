@@ -137,38 +137,42 @@
     © تچانو | نو از ما، تَچ از تو
   </footer>
 
-  <script>
-    document.getElementById('signup-form').addEventListener('submit', function (e) {
-      e.preventDefault();
-      const form = e.target;
-      const formData = new FormData(form);
-      const successMessage = document.getElementById('success-message');
+<script>
+  const form = document.getElementById("signup-form");
+  const successMessage = document.getElementById("success-message");
 
-      // ارسال به Getform
-      fetch("https://getform.io/f/axoydvqb", {
-        method: "POST",
-        body: formData,
-        headers: {
-          'Accept': 'application/json'
-        }
-      })
-      .then(response => {
-        if (response.ok) {
-          form.style.opacity = '0';
-          form.style.transform = 'scale(0.95)';
+  form.addEventListener("submit", function(e) {
+    e.preventDefault();
+    const email = form.email.value;
+
+    fetch("https://script.google.com/macros/s/AKfycbwjaJSRWXZaf7iitBwcD-HYxe4DRcYJOB-Qcd96jDxeygSwyALZypMJWr4mivGnIlXKjw/exec", {
+      method: "POST",
+      body: new URLSearchParams({ email }),
+    })
+    .then(res => res.text())
+    .then(text => {
+      if (text.trim() === "success") {
+        form.style.transition = 'all 0.4s ease';
+        form.style.opacity = '0';
+        form.style.transform = 'scale(0.95)';
+        
+        setTimeout(() => {
+          form.style.display = 'none';
+          successMessage.style.opacity = 0;
+          successMessage.style.display = 'block';
+          successMessage.style.transition = 'opacity 0.5s ease';
           setTimeout(() => {
-            form.style.display = 'none';
-            successMessage.classList.add('active');
-          }, 500);
-        } else {
-          alert('مشکلی پیش آمد. لطفاً دوباره تلاش کنید.');
-        }
-      })
-      .catch(() => {
-        alert('ارتباط با سرور برقرار نشد.');
-      });
+            successMessage.style.opacity = 1;
+          }, 50);
+        }, 400);
+      } else {
+        alert('مشکلی پیش آمد. لطفاً دوباره تلاش کنید.');
+      }
+    })
+    .catch(() => {
+      alert('ارتباط با سرور برقرار نشد.');
     });
-  </script>
-
+  });
+</script>
 </body>
 </html>
