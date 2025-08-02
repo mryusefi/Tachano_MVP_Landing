@@ -4,8 +4,14 @@
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
   <title>تَچانو | نو از ما، تَچ از تو</title>
-  <link rel="stylesheet" href="assest/font/Estedad-Medium.woff2" />
   <style>
+    @font-face {
+      font-family: 'Estedad';
+      src: url('assest/font/Estedad-Bold.woff2') format('woff2');
+      font-weight: normal;
+      font-style: normal;
+    }
+
     * {
       margin: 0;
       padding: 0;
@@ -13,7 +19,7 @@
     }
 
     body {
-      font-family: 'Estedad, sans-serif';
+      font-family: 'Estedad', sans-serif;
       background-color: #0b1e36;
       color: #ffffff;
       display: flex;
@@ -25,18 +31,23 @@
     }
 
     img.logo {
-      width: 200px;
-      margin-bottom: 30px;
+      width: 400px;
+      margin-bottom: 24px;
+      transition: transform 0.4s ease;
+    }
+
+    img.logo:hover {
+      transform: scale(1.03);
     }
 
     h1 {
-      font-size: 2.2rem;
-      margin-bottom: 1rem;
+      font-size: 1.9rem;
+      margin-bottom: 1.2rem;
       color: #ffffff;
     }
 
     p.subhead {
-      font-size: 1.1rem;
+      font-size: 0.9rem;
       color: #cfd8dc;
       max-width: 600px;
       line-height: 1.8;
@@ -49,30 +60,50 @@
       gap: 15px;
       width: 100%;
       max-width: 400px;
+      transition: opacity 0.5s ease, transform 0.5s ease;
     }
 
     input[type="email"] {
-      padding: 14px;
+      padding: 16px;
       font-size: 1rem;
-      border-radius: 8px;
+      border-radius: 16px;
       border: none;
       outline: none;
+      box-shadow: 0 2px 6px rgba(0, 0, 0, 0.15);
     }
 
     button {
-      padding: 14px;
+      padding: 16px;
       font-size: 1rem;
       font-weight: bold;
+      font-family: inherit;
       color: #0b1e36;
       background-color: #42a5f5;
       border: none;
-      border-radius: 8px;
+      border-radius: 16px;
       cursor: pointer;
-      transition: background 0.3s ease;
+      transition: background 0.3s ease, transform 0.3s ease;
     }
 
     button:hover {
       background-color: #2196f3;
+      transform: scale(1.02);
+    }
+
+    #success-message {
+      display: none;
+      margin-top: 20px;
+      color: #81c784;
+      font-size: 1rem;
+      opacity: 0;
+      transform: translateY(20px);
+      transition: opacity 0.6s ease, transform 0.6s ease;
+    }
+
+    #success-message.active {
+      display: block;
+      opacity: 1;
+      transform: translateY(0);
     }
 
     footer {
@@ -90,18 +121,54 @@
   <h1>تچانو، جایی که محتوا با علاقه‌های تو حرکت می‌کنه</h1>
 
   <p class="subhead">
-    تَچانو با رصد هوشمند سایت‌های فارسی و خارجی، محتواهایی که واقعاً برات مهمن رو برات جمع می‌کنه — فقط با انتخاب چندتا هشتگ.
+    تَچانو با رصد هوشمند سایت‌های فارسی و خارجی، محتواهایی که واقعاً برات مهمن رو برات جمع می‌کنه فقط با انتخاب چندتا هشتگ.
     <br />
     قراره نسخه آزمایشی تا ۱۰ روز دیگه منتشر بشه، و فقط ۲۰۰ نفر به تست اولیه دسترسی دارن.
   </p>
 
-  <form action="https://formspree.io/f/your-form-id" method="POST">
-    <input type="email" name="email" placeholder="ایمیل خود را وارد کنید" required />
+  <form id="signup-form">
+    <input type="email" name="email" id="email" placeholder="ایمیل خود را وارد کنید" required />
     <button type="submit">ثبت‌نام برای تست</button>
   </form>
+
+  <p id="success-message">✅ ایمیل شما با موفقیت ثبت شد. طی چند روز آینده لینک تست MVP برای شما ارسال خواهد شد.</p>
 
   <footer>
     © تچانو | نو از ما، تَچ از تو
   </footer>
+
+  <script>
+    document.getElementById('signup-form').addEventListener('submit', function (e) {
+      e.preventDefault();
+      const form = e.target;
+      const formData = new FormData(form);
+      const successMessage = document.getElementById('success-message');
+
+      // ارسال به Getform
+      fetch("https://getform.io/f/axoydvqb", {
+        method: "POST",
+        body: formData,
+        headers: {
+          'Accept': 'application/json'
+        }
+      })
+      .then(response => {
+        if (response.ok) {
+          form.style.opacity = '0';
+          form.style.transform = 'scale(0.95)';
+          setTimeout(() => {
+            form.style.display = 'none';
+            successMessage.classList.add('active');
+          }, 500);
+        } else {
+          alert('مشکلی پیش آمد. لطفاً دوباره تلاش کنید.');
+        }
+      })
+      .catch(() => {
+        alert('ارتباط با سرور برقرار نشد.');
+      });
+    });
+  </script>
+
 </body>
 </html>
