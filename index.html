@@ -3,87 +3,105 @@
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>شروع زودهنگام | استارتاپ ما</title>
+  <title>تَچانو | نو از ما، تَچ از تو</title>
+  <link rel="stylesheet" href="assest/font/Estedad-Medium.woff2" />
   <style>
-    body {
+    * {
       margin: 0;
-      font-family: 'Tahoma', sans-serif;
-      background: linear-gradient(to bottom, #0d47a1, #1976d2);
-      color: #fff;
-      display: flex;
-      flex-direction: column;
-      align-items: center;
-      justify-content: center;
-      height: 100vh;
-      padding: 20px;
+      padding: 0;
       box-sizing: border-box;
     }
 
-    h1 {
-      font-size: 2.5rem;
-      margin-bottom: 1rem;
+    body {
+      font-family: 'Estedad, sans-serif';
+      background-color: #0b1e36;
+      color: #ffffff;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      text-align: center;
+      padding: 40px 20px;
+      min-height: 100vh;
     }
 
-    p {
+    img.logo {
+      width: 200px;
+      margin-bottom: 30px;
+    }
+
+    h1 {
+      font-size: 2.2rem;
+      margin-bottom: 1rem;
+      color: #ffffff;
+    }
+
+    p.subhead {
       font-size: 1.1rem;
-      max-width: 500px;
-      text-align: center;
-      margin-bottom: 2rem;
+      color: #cfd8dc;
+      max-width: 600px;
       line-height: 1.8;
+      margin-bottom: 2.5rem;
     }
 
     form {
       display: flex;
       flex-direction: column;
-      gap: 10px;
+      gap: 15px;
       width: 100%;
       max-width: 400px;
     }
 
     input[type="email"] {
-      padding: 12px;
-      border: none;
-      border-radius: 6px;
+      padding: 14px;
       font-size: 1rem;
+      border-radius: 8px;
+      border: none;
+      outline: none;
     }
 
     button {
-      padding: 12px;
-      background-color: #64b5f6;
-      color: #0d47a1;
+      padding: 14px;
       font-size: 1rem;
+      font-weight: bold;
+      color: #0b1e36;
+      background-color: #42a5f5;
       border: none;
-      border-radius: 6px;
+      border-radius: 8px;
       cursor: pointer;
       transition: background 0.3s ease;
     }
 
     button:hover {
-      background-color: #42a5f5;
+      background-color: #2196f3;
     }
 
     footer {
-      position: absolute;
-      bottom: 15px;
+      margin-top: auto;
+      padding-top: 30px;
       font-size: 0.9rem;
-      opacity: 0.7;
+      color: #90a4ae;
     }
   </style>
 </head>
 <body>
 
-  <h1>ورود زودهنگام به محصول آینده‌ساز</h1>
+  <img src="assest/banner.png" alt="لوگوی تچانو" class="logo" />
 
-  <p>
-    فقط <strong>۲۰۰ نفر اول</strong> می‌تونن در تست اولیه استارتاپ ما شرکت کنن!  
-    ایمیل خودت رو وارد کن تا در لیست افراد منتخب باشی و زودتر از همه دسترسی بگیری.
+  <h1>تچانو، جایی که محتوا با علاقه‌های تو حرکت می‌کنه</h1>
+
+  <p class="subhead">
+    تَچانو با رصد هوشمند سایت‌های فارسی و خارجی، محتواهایی که واقعاً برات مهمن رو برات جمع می‌کنه — فقط با انتخاب چندتا هشتگ.
+    <br />
+    قراره نسخه آزمایشی تا ۱۰ روز دیگه منتشر بشه، و فقط ۲۰۰ نفر به تست اولیه دسترسی دارن.
   </p>
 
   <form action="https://formspree.io/f/your-form-id" method="POST">
-    <input type="email" name="email" placeholder="ایمیل شما" required />
-    <button type="submit">ثبت‌نام</button>
+    <input type="email" name="email" placeholder="ایمیل خود را وارد کنید" required />
+    <button type="submit">ثبت‌نام برای تست</button>
   </form>
 
-  <footer>© استارتاپ شما - ۲۰۲۵</footer>
+  <footer>
+    © تچانو | نو از ما، تَچ از تو
+  </footer>
 </body>
 </html>
