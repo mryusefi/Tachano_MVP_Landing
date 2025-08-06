@@ -159,41 +159,51 @@
   </footer>
 
 <script>
+
   const form = document.getElementById("signup-form");
+  const emailInput = document.getElementById("email");
+  const button = form.querySelector("button");
   const successMessage = document.getElementById("success-message");
 
-  form.addEventListener("submit", function(e) {
+  form.addEventListener("submit", function (e) {
     e.preventDefault();
-    const email = form.email.value;
 
-    fetch("https://script.google.com/macros/s/AKfycbwjaJSRWXZaf7iitBwcD-HYxe4DRcYJOB-Qcd96jDxeygSwyALZypMJWr4mivGnIlXKjw/exec", {
+    const email = emailInput.value;
+
+    button.disabled = true;
+    button.textContent = "⏳ در حال ارسال...";
+
+    fetch("  https://script.google.com/macros/s/AKfycbwjaJSRWXZaf7iitBwcD-HYxe4DRcYJOB-Qcd96jDxeygSwyALZypMJWr4mivGnIlXKjw/exec", {
       method: "POST",
       body: new URLSearchParams({ email }),
     })
-    .then(res => res.text())
-    .then(text => {
-      if (text.trim() === "success") {
-        form.style.transition = 'all 0.4s ease';
-        form.style.opacity = '0';
-        form.style.transform = 'scale(0.95)';
-        
+    .then((res) => res.text())
+    .then((text) => {
+      if (text === "success") {
+        form.style.opacity = "0";
+        form.style.transform = "scale(0.95)";
         setTimeout(() => {
-          form.style.display = 'none';
-          successMessage.style.opacity = 0;
-          successMessage.style.display = 'block';
-          successMessage.style.transition = 'opacity 0.5s ease';
-          setTimeout(() => {
-            successMessage.style.opacity = 1;
-          }, 50);
-        }, 400);
+          form.style.display = "none";
+          successMessage.classList.add("active");
+          successMessage.style.display = "block";
+        }, 500);
       } else {
-        alert('مشکلی پیش آمد. لطفاً دوباره تلاش کنید.');
+        alert("مشکلی پیش آمد. لطفاً دوباره تلاش کنید.");
+        resetButton();
       }
     })
     .catch(() => {
-      alert('ارتباط با سرور برقرار نشد.');
+      alert("ارتباط با سرور برقرار نشد.");
+      resetButton();
     });
+
+    function resetButton() {
+      button.disabled = false;
+      button.textContent = "ثبت‌نام برای تست";
+    }
   });
+</script>
+
 </script>
 </body>
 </html>
